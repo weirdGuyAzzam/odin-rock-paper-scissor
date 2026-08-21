@@ -1,6 +1,8 @@
 let displayHumanWins = document.getElementById("humnWinRounds")
 let displayComputerWins = document.getElementById("compWinRounds")
-let displayResult= document.getElementById("result")
+
+let displayRoundResult= document.getElementById("roundResult")
+let displayGameResult= document.getElementById("gameResult")
 
 let displayHumanChoice = document.getElementById('HumanChoice')
 let displayComputerChoice = document.getElementById('ComputerChoice')
@@ -23,11 +25,12 @@ buttonChoice.forEach((button) => {
   button.addEventListener('click', function (e) {
     e.preventDefault()
     console.log("hello")
-    playRound(computerChoice, humanChoice)
 
     computerChoice = getComputerChoice()
-
     humanChoice = button.textContent
+
+    playRound(computerChoice, humanChoice)
+
     if (currentRound == 0) {
       displayHumanChoice.innerText = ''
       displayComputerChoice.innerText = ''
@@ -36,81 +39,52 @@ buttonChoice.forEach((button) => {
       displayComputerChoice.innerText = "Computer Choice is : " + computerChoice
     }
     buttons.style.display = 'none'
-
+    console.log(currentRound)
   })
 })
-
-
-triggerButtonsAppear.addEventListener('click', function (e) {
-  e.preventDefault()
-  buttons.style.display = 'block'
-})
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
 function playRound(com, hum) {
   if(com === hum){
-      displayResult.innerText = "Tied!"
+      displayRoundResult.innerText = "Tied!"
       currentRound += 1
     }else if(hum === "paper" && com === "rock"){
-      displayResult.innerText = "You Win!, rock lost to paper!"
+      displayRoundResult.innerText = "You Win!, rock lost to paper!"
       humanScore += 1
       currentRound += 1
     }else if(hum === "paper" && com === "scissor"){
-      displayResult.innerText = "You Lose, paper lost to scissor !"
+      displayRoundResult.innerText = "You Lose, paper lost to scissor !"
       computerScore += 1
       currentRound += 1
     }else if(hum === "scissor" && com === "rock"){
-      displayResult.innerText = "You Lose, scissor lost to rock !"
+      displayRoundResult.innerText = "You Lose, scissor lost to rock !"
       computerScore += 1
       currentRound += 1
     }else if(hum === "scissor" && com === "paper"){
-      displayResult.innerText = "You Win, paper lost to scissor!"
+      displayRoundResult.innerText = "You Win, paper lost to scissor!"
       humanScore += 1
       currentRound += 1
     }else if(hum === "rock" && com === "paper"){
-      displayResult.innerText = "You lose, rock lost to paper !"
+      displayRoundResult.innerText = "You lose, rock lost to paper !"
       computerScore += 1
       currentRound += 1
     }else if(hum === "rock" && com === "scissor"){
-      displayResult.innerText = "You Win, scissor lost to rock !"
+      displayRoundResult.innerText = "You Win, scissor lost to rock !"
       humanScore += 1
       currentRound += 1
     }
-  if (currentRound == 5) {
-    if (humanScore > computerScore) {
-      alert("YOU WIN THE GAME !!!")
-      humanScore = 0
-      computerScore = 0
-      currentRound = 0
-    } else if (humanScore < computerScore) {
-      alert("you lost.")
-      humanScore = 0
-      computerScore = 0
-      currentRound = 0
-    } else {
-      alert("unfortunately it's tied")
-      humanScore = 0
-      computerScore = 0
-      currentRound = 0
-    }
-  }
   displayComputerWins.textContent = 'Total Computer round win :' + computerScore
   displayHumanWins.textContent = 'Total Human round win :' + humanScore
+  if (currentRound >= 5) {
+    if (humanScore > computerScore) {
+      displayGameResult.textContent = "YOU WIN THE GAME !!!"
+    } else if (humanScore < computerScore) {
+      displayGameResult.textContent = "you lost."
+    } else {
+      displayGameResult.textContent = "unfortunately it's tied"
+    }
+  }
 }
 
 function getComputerChoice() {
@@ -124,3 +98,18 @@ function getComputerChoice() {
   }
   return choice
 }
+
+triggerButtonsAppear.addEventListener('click', function (e) {
+  e.preventDefault()
+  buttons.style.display = 'block'
+  displayHumanChoice.innerText = ''
+  displayComputerChoice.innerText = ''
+  displayRoundResult.innerText = ""
+  displayGameResult.textContent = ""
+  if (currentRound >= 5) {
+    humanScore = 0
+    computerScore = 0
+    currentRound = 0
+  }
+
+})

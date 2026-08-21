@@ -1,0 +1,26 @@
+body {
+    display: flex;
+    margin: 0;
+    padding: 0;
+    background-color: saddlebrown;
+}
+
+#main {
+    background-color: goldenrod;
+    border-radius: 5px;
+    margin: 0 auto;
+    margin-top: 5rem;
+    text-align: center;
+    padding: 2rem;
+    font-family:'Courier New', Courier, monospace;
+    color: ;
+}
+
+button {
+    font-family: 'Courier New', Courier, monospace;
+    background-color: saddlebrown;
+    border: none;
+    border-radius: 2px;
+    padding: 5px;
+    color: wheat;
+}
